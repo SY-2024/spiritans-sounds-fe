@@ -1,0 +1,14 @@
+export const MAIN_NAV = [
+	{ label: "Home", href: "/" },
+	{ label: "About the Ministry", href: "/about" },
+	{ label: "Homilies & Reflections", href: "/homilies" },
+	{ label: "Prayers & Devotionals", href: "/prayers" },
+	{ label: "Music & Worship", href: "/music" },
+	{ label: "Online Radio", href: "/radio" },
+	{ label: "Publications", href: "/publications" },
+	{ label: "Unveiler Magazine", href: "/unveiler" },
+	{ label: "News & Events", href: "/events" },
+	{ label: "Donations", href: "/donate" },
+	{ label: "Newsletter", href: "/newsletter" },
+	{ label: "Contact", href: "/contact" },
+];

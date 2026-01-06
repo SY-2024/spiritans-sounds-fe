@@ -1,10 +1,10 @@
 import MagazineNav from "@/components/magazine/MagazineNav";
 
-export default function MagazineLayout({ children }: { children: React.ReactNode }) {
+export default function UnveilerLayout({ children }: { children: React.ReactNode }) {
 	return (
-		<section className="bg-neutral-950 text-white min-h-screen">
+		<section className="unveiler-theme min-h-screen bg-background text-foreground">
 			<MagazineNav />
-			<div className="max-w-6xl mx-auto px-4 py-10">{children}</div>
+			{children}
 		</section>
 	);
 }

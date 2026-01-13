@@ -1,40 +1,113 @@
 "use client";
 
 import Link from "next/link";
-import { usePathname } from "next/navigation";
-import { MAIN_NAV } from "@/lib/navigation";
-import clsx from "clsx";
+import {
+	NavigationMenu,
+	NavigationMenuItem,
+	NavigationMenuList,
+	NavigationMenuTrigger,
+	NavigationMenuContent,
+} from "@/components/ui/navigation-menu";
+import { Button } from "@/components/ui/button";
+import MobileNav from "./HeaderMobile";
 
 export default function Header() {
-	const pathname = usePathname();
-
 	return (
-		<header className="sticky top-0 z-50 bg-white border-b">
-			<div className="max-w-7xl mx-auto px-6 h-16 flex items-center justify-between">
+		<header className="sticky top-0 z-50 border-b border-border bg-background">
+			<div className="mx-auto flex h-16 max-w-7xl items-center justify-between px-4">
 				{/* Logo */}
-				<Link href="/" className="font-bold text-xl">
+				<Link href="/" className="font-bold text-lg text-primary">
 					Catholic Ministry
 				</Link>
 
-				{/* Desktop Nav */}
-				<nav className="hidden lg:flex gap-6">
-					{MAIN_NAV.map((item) => {
-						const isActive = pathname === item.href || pathname.startsWith(item.href + "/");
+				{/* Desktop Navigation */}
+				<NavigationMenu className="hidden md:block">
+					<NavigationMenuList className="gap-4">
+						<NavLink href="/">Home</NavLink>
+						<NavLink href="/about">About</NavLink>
 
-						return (
+						{/* Word & Worship */}
+						<NavigationMenuItem>
+							<NavigationMenuTrigger>Word & Worship</NavigationMenuTrigger>
+							<NavigationMenuContent>
+								<MenuPanel>
+									<MenuLink href="/homilies">Homilies & Reflections</MenuLink>
+									<MenuLink href="/prayers">Prayers & Devotionals</MenuLink>
+									<MenuLink href="/music">Music & Worship</MenuLink>
+								</MenuPanel>
+							</NavigationMenuContent>
+						</NavigationMenuItem>
+
+						{/* Media */}
+						<NavigationMenuItem>
+							<NavigationMenuTrigger>Media</NavigationMenuTrigger>
+							<NavigationMenuContent>
+								<MenuPanel>
+									<MenuLink href="/news">News / Events</MenuLink>
+									<MenuLink href="/radio">🎙 Online Radio</MenuLink>
+									<MenuLink href="/newsletter">Newsletter</MenuLink>
+								</MenuPanel>
+							</NavigationMenuContent>
+						</NavigationMenuItem>
+
+						{/* High-priority Unveiler link */}
+						<NavigationMenuItem>
 							<Link
-								key={item.href}
-								href={item.href}
-								className={clsx(
-									"text-sm font-medium transition hover:text-black",
-									isActive ? "text-black" : "text-gray-600"
-								)}>
-								{item.label}
+								href="/unveiler"
+								className="rounded-full bg-primary px-4 py-2 text-sm font-semibold text-primary-foreground
+               hover:opacity-90 transition">
+								🎭 Unveiler Magazine
 							</Link>
-						);
-					})}
-				</nav>
+						</NavigationMenuItem>
+
+						{/* Resources */}
+						<NavigationMenuItem>
+							<NavigationMenuTrigger>Resources</NavigationMenuTrigger>
+							<NavigationMenuContent>
+								<MenuPanel>
+									<MenuLink href="/publications">📚 eBooks & Publications</MenuLink>
+								</MenuPanel>
+							</NavigationMenuContent>
+						</NavigationMenuItem>
+
+						<NavLink href="/contact">Contact</NavLink>
+					</NavigationMenuList>
+				</NavigationMenu>
+
+				{/* CTA */}
+				<div className="hidden md:block">
+					<Button asChild>
+						<Link href="/donations">Donate</Link>
+					</Button>
+				</div>
+
+				{/* Mobile */}
+				<MobileNav />
 			</div>
 		</header>
+	);
+}
+
+/* -------------------------------- */
+
+function NavLink({ href, children }: any) {
+	return (
+		<NavigationMenuItem>
+			<Link href={href} className="text-sm font-medium text-muted hover:text-foreground">
+				{children}
+			</Link>
+		</NavigationMenuItem>
+	);
+}
+
+function MenuPanel({ children }: any) {
+	return <div className="grid w-56 gap-2 p-4">{children}</div>;
+}
+
+function MenuLink({ href, children }: any) {
+	return (
+		<Link href={href} className="rounded-md px-3 py-2 text-sm hover:bg-surface">
+			{children}
+		</Link>
 	);
 }

@@ -7,7 +7,6 @@
    Base Ministry Theme Tokens
    =============================== */
 :root {
-
 	--primary: oklch(0.205 0 0);
 	--primary-foreground: oklch(0.985 0 0);
 
@@ -110,7 +109,6 @@
 }
 
 .dark {
-
 	--background: oklch(0.145 0 0);
 
 	--foreground: oklch(0.985 0 0);
@@ -175,10 +173,10 @@
 }
 
 @layer base {
-  * {
-    @apply border-border outline-ring/50;
+	* {
+		@apply border-border outline-ring/50;
 	}
-  body {
-    @apply bg-background text-foreground;
+	body {
+		@apply bg-background text-foreground;
 	}
 }
